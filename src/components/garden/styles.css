@@ -1,0 +1,42 @@
+.tableOverlay {
+    position: absolute;
+    z-index: 11;
+    height: 100%;
+    width: 100%;
+}
+
+.firstFrame {
+    display: flex;
+}
+
+.firstFrame, .tableOverlay {
+    grid-area: 1 / 1;
+}
+
+.titleWrapper {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 2px 4px 8px rgba(32, 29, 29, 0.7);
+    text-align: center;
+    vertical-align: top;
+    letter-spacing: 0.13em;
+    color: var(--primary-green);
+    justify-content: center;
+    max-height: 4rem;
+}
+
+.firstFrame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.grassWrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.gardenContainer {
+    display: grid;
+}
