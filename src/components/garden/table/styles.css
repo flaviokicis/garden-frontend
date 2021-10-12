@@ -20,6 +20,7 @@ td {
 }
 
 .sbItem {
+    height: 100%;
     color: var(--primary-green);
     display: flex;
     background-color: #2F560D;
@@ -36,6 +37,10 @@ td {
 }
 
 .sbItem h3 {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
     margin-left: 3rem;
     text-align: center;
     align-self: center;
@@ -59,16 +64,9 @@ td {
     width: 80%;
     margin-right: 2rem;
     margin-left: 4rem;
-    padding-left: 2rem;
     border: 1px solid var(--primary-green);
     box-shadow: 4px 15px 5px 3px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 4px 15px 5px 3px rgba(0, 0, 0, 0.3);
-}
-
-.gardenRow h3 {
-    text-align: center;
-    line-height: 100px;
-    margin: 0 10px;
 }
 
 

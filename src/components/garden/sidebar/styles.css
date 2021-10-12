@@ -13,6 +13,10 @@
 }
 
 .sbBackground h3 {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
     margin: 35px 0 0 45px;
     color: var(--primary-green);
     font-size: 18px;

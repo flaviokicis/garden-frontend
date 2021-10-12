@@ -1,6 +1,6 @@
 
 import React from 'react';
-import FruitsRow from '../entities/fruits/fruits-row';
+import CommonRow from '../entities/fruits/common-row';
 import './styles.css';
 import {GiFruitTree, GiFlowerPot, GiSittingDog, GiParkBench} from 'react-icons/gi';
 
@@ -16,7 +16,7 @@ const TableRows = (props) => {
                     <h3>Fruits</h3>
                 </td>
                 <td className="gardenRow fruitsRow">
-                    <FruitsRow listener={props.listener}/>
+                    <CommonRow listener={props.listener} items={props.fruits}/>
                 </td>
             </tr>
             <tr>
@@ -24,21 +24,27 @@ const TableRows = (props) => {
                     <GiFlowerPot className="icon" size={60}/>
                     <h3>Flowers</h3>
                 </td>
-                <td className="gardenRow flowersRoew"></td>
+                <td className="gardenRow flowersRoew">
+                    <CommonRow listener={props.listener} items={props.flowers}/>
+                </td>
             </tr>
             <tr>
                 <td className="sbItem animalsCategory">
                     <GiSittingDog className="icon" size={60}/>
                     <h3>Animals</h3>
                 </td>
-                <td className="gardenRow animalsRow"></td>
+                <td className="gardenRow animalsRow">
+                <CommonRow listener={props.listener} items={props.animals}/>
+                </td>
             </tr>
             <tr>
                 <td className="sbItem decorationsCategory">
                     <GiParkBench className="icon" size={60}/>
                     <h3>Objects</h3>
                 </td>
-                <td className="gardenRow decorationsRow"></td>
+                <td className="gardenRow decorationsRow">
+                <CommonRow listener={props.listener} items={props.decorations}/>
+                </td>
             </tr>
             </tbody>
             </table>

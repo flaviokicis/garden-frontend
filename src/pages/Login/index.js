@@ -3,6 +3,7 @@ import client from '../../services/client.js';
 import {toast} from 'material-react-toastify';
 import history from "../../services/history.js";
 import { useEffect } from "react";
+import './styles.css';
 
 export default function Login() {
 
@@ -27,7 +28,7 @@ export default function Login() {
             try {
             const data = await client.get('/auth/checkSession');
             if (data.status === 200) {
-                history.push('/');
+               history.push('/');
             }
             } catch (error) {
                 //Stay
@@ -36,8 +37,10 @@ export default function Login() {
     });
 
     return (
-        <Container>
+        <div className="loginWrapper">
+            <div className="panel">
             <form onSubmit={handleSubmit}>
+            <div className="inputWrapper">
             <input 
             type="text" 
             name="nickname" 
@@ -45,7 +48,9 @@ export default function Login() {
             placeholder="Your nickname"
             required/>
             <button type="submit">Login</button>
+            </div>
             </form>
-        </Container>
+            </div>
+        </div>
     );
 }

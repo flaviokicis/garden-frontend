@@ -8,7 +8,7 @@ const GardenContainer = (props) => {
         <>
             <div className="gardenContainer">
                 <div className="firstFrame">
-                <Sidebar nickname={"Jonas"}/>
+                <Sidebar nickname={props.nickname}/>
                     <div className="grassWrapper">
                         <div className="titleWrapper">
                             <h3 style={{ fontSize: '2.5rem' }}>Our Little Garden</h3>
@@ -16,7 +16,13 @@ const GardenContainer = (props) => {
                     </div>
                 </div>
                 <div className="tableOverlay">
-                    <TableRows listener={props.listener}/>
+                    <TableRows 
+                    listener={props.listener}
+                    fruits={props.fruits}
+                    flowers={props.flowers}
+                    animals={props.animals}
+                    decorations={props.decorations}
+                    />
                 </div>
             </div>
         </>

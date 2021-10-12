@@ -2,12 +2,21 @@ import React, {useEffect, useState} from 'react';
 import GardenContainer from '../../components/garden/index.js';
 import DefaultSpinner from '../../components/modals/spinner/default-spinner.js';
 import client from '../../services/client.js';
-// import history from '../../services/history.js';
+import {toast} from 'material-react-toastify';
+import history from '../../services/history.js';
 
 
 export default function Garden() {
 
     const [loaded, setLoaded] = useState(false);
+    const [id, setID] = useState("asa");
+    const [nickname, setNickname] = useState("Jonas");
+    const [fruits, setFruits] = useState([]);
+    const [animals, setAnimals] = useState([]);
+    const [flowers, setFlowers] = useState([]);
+    const [decorations, setDecorations] = useState([]);
+    const [players, setPlayers] = useState([0]);
+    const [sat, setSat] = useState(false);
 
     useEffect(() => {
         const loadEventSource = async () => {
@@ -15,10 +24,11 @@ export default function Garden() {
         
         // Check if user is logged in
         try {
-        await client.get('/auth/checkSession', {});
+        const data = await client.get('/auth/checkSession', {});
+        console.log(data);
         } catch (error) {
             setLoaded(true);
-            // return history.push('/login');
+            return history.push('/login');
         }
 
         const events = new EventSource(`${process.env.REACT_APP_BACKEND_URL}/api/v1/listen/`
@@ -27,14 +37,15 @@ export default function Garden() {
         events.onmessage = event => {
 
         const receivedData = JSON.parse(event.data);
-
-        // Will be implemented in the future
         switch (receivedData.eventType) {
           case "handshake":
-            console.log("HANDSHAKE >>>>>> " + receivedData.handshakeData);
+            handleHandshake(receivedData.data);
             break;
           case "update":
-            console.log("UPDATE >>>>>> " + receivedData.updateData);
+            console.log("UPDATE >>>>>> " + receivedData.data);
+            break;
+          case "delete":
+            console.log("UPDATE >>>>>> " + receivedData.data);
             break;
           default:
             break;
@@ -46,16 +57,43 @@ export default function Garden() {
     loadEventSource();
     }, [loaded]);
 
-    const parentListener = function(data) {
-      // Receive data from components
+    // Receives data from components
+    const parentListener = async function(data) {
+      try {
+        await client.post('/update', data);
+      } catch (error) {
+        toast.error(error.response?.data?.message);
+      }
     };
-
-
     
+    const handleHandshake = (handshakeData) => {
+        if (handshakeData.fruits) {
+          setFruits(handshakeData.fruits);
+        } 
+        if (handshakeData.flowers) {
+          setFlowers(handshakeData.flowers);
+        }
+        if (handshakeData.animals) {
+          setAnimals(handshakeData.animals);
+        } 
+        if (handshakeData.decorations) {
+          setDecorations(handshakeData.decorations);
+        }
+        if (handshakeData.extra && handshakeData.extra.playersOnline) {
+          setPlayers(handshakeData.extra.playersOnline);
+        }
+    }
 
     return (
         <>
-            <GardenContainer listener={parentListener} />
+            <GardenContainer 
+            listener={parentListener}
+            nickname={nickname}
+            fruits={fruits}
+            flowers={flowers}
+            animals={animals}
+            decorations={decorations}
+            />
             {<DefaultSpinner hasLoaded={loaded}/>
             }
 

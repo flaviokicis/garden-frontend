@@ -14,6 +14,10 @@
 }
 
 .titleWrapper {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
     margin-top: 15px;
     margin-left: auto;
     margin-right: auto;

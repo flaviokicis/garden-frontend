@@ -19,6 +19,15 @@ export default createGlobalStyle`
     padding: 0;
     }
 
+    .Toastify__toast {
+        max-height: 25px;
+        justify-contents: center;
+    }
+
+    .Toastify__toast-body {
+        margin-top: 10px;
+    }
+
     html, body { 
         height: 100%;
         margin: 0;
