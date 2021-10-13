@@ -17,7 +17,7 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     pointer-events: none;
-    margin: 35px 0 0 45px;
+    margin: 25px 32px 0 45px;
     color: var(--primary-green);
     font-size: 18px;
     animation: leaves 8s ease-in-out infinite alternate;

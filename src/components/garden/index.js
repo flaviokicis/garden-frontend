@@ -16,6 +16,7 @@ const GardenContainer = (props) => {
                     </div>
                 </div>
                 <div className="tableOverlay">
+                <h5 className="online">Online Now: {props.online}</h5>
                     <TableRows 
                     listener={props.listener}
                     fruits={props.fruits}

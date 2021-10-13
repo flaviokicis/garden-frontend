@@ -9,13 +9,13 @@ import history from '../../services/history.js';
 export default function Garden() {
 
     const [loaded, setLoaded] = useState(false);
-    const [id, setID] = useState("asa");
-    const [nickname, setNickname] = useState("Jonas");
+    const [id, setID] = useState("");
+    const [nickname, setNickname] = useState("loading...");
     const [fruits, setFruits] = useState([]);
     const [animals, setAnimals] = useState([]);
     const [flowers, setFlowers] = useState([]);
     const [decorations, setDecorations] = useState([]);
-    const [players, setPlayers] = useState([0]);
+    const [players, setPlayers] = useState(0);
     const [sat, setSat] = useState(false);
 
     useEffect(() => {
@@ -25,7 +25,8 @@ export default function Garden() {
         // Check if user is logged in
         try {
         const data = await client.get('/auth/checkSession', {});
-        console.log(data);
+        setID(data.data?.stack.id);
+        setNickname(data.data?.stack.nickname);
         } catch (error) {
             setLoaded(true);
             return history.push('/login');
@@ -42,7 +43,7 @@ export default function Garden() {
             handleHandshake(receivedData.data);
             break;
           case "update":
-            console.log("UPDATE >>>>>> " + receivedData.data);
+            handleUpdate(receivedData.data);
             break;
           case "delete":
             console.log("UPDATE >>>>>> " + receivedData.data);
@@ -65,7 +66,10 @@ export default function Garden() {
         toast.error(error.response?.data?.message);
       }
     };
-    
+
+    const handleUpdate = (updateData) => {
+
+    }    
     const handleHandshake = (handshakeData) => {
         if (handshakeData.fruits) {
           setFruits(handshakeData.fruits);
@@ -79,8 +83,8 @@ export default function Garden() {
         if (handshakeData.decorations) {
           setDecorations(handshakeData.decorations);
         }
-        if (handshakeData.extra && handshakeData.extra.playersOnline) {
-          setPlayers(handshakeData.extra.playersOnline);
+        if (handshakeData.playersOnline) {
+          setPlayers(handshakeData.playersOnline);
         }
     }
 
@@ -93,6 +97,7 @@ export default function Garden() {
             flowers={flowers}
             animals={animals}
             decorations={decorations}
+            online={players}
             />
             {<DefaultSpinner hasLoaded={loaded}/>
             }

@@ -4,7 +4,6 @@ export default function getButtons(itemState, order) {
     let type = itemState.type.toUpperCase();
     if (type === "FRUIT") {
         if (order === "PRIMARY") {
-            console.log(itemState.ableToHarvest && !itemState.ableToWater)
             if (itemState.ableToHarvest && !itemState.ableToWater) {
                 return {name: "HARVEST", clickable: true};
             } else {
