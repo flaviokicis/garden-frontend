@@ -48,9 +48,58 @@
 .online {
     color: var(--primary-green);
     position: absolute;
+    font-size: 15px;
     top: 25px;
-    right: 45px;
+    right: 65px;
     max-height: 30px;
+}
+
+@media (max-width: 1000px) {
+    .online {
+      transform: translateX(60px);
+    }
+}
+
+.statsLink {
+    color: var(--primary-green);
+    position: absolute;
+    font-size: 15px;
+    top: 55px;
+    right: 65px;
+    max-height: 30px;
+    text-align: end;
+}
+
+.arrowTiny {
+    position: absolute;
+    max-height: 20px;
+    color: var(--primary-green);
+    top: 55px;
+    right: 225px;
+}
+
+@media (max-width: 1000px) {
+    .arrowTiny {
+      transform: translateX(60px);
+    }
+}
+
+.statsLink a {
+    color: var(--secondary-green);
+    font-style: italic;
+    transition: all 0.1s ease-in-out;
+}
+
+.statsLink a:hover {
+    text-decoration: underline;
+    color: var(--primary-green);
+    font-style: italic;
+}
+
+@media (max-width: 1000px) {
+    .statsLink {
+      transform: translateX(60px);
+    }
 }
 
 #logDiv {
@@ -58,7 +107,7 @@
     z-index: 9999999;
     user-select: all;
     position: absolute;
-    left: 22vw;
+    left: 24vw;
     top: 0.5rem;
     font-size: 12px;
     color: var(--primary-green);

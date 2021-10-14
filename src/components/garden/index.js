@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './sidebar';
 import './styles.css';
 import TableRows from './table';
+import {BsArrowRightShort} from 'react-icons/bs';
 
 const GardenContainer = (props) => {
     return (
@@ -26,6 +27,8 @@ const GardenContainer = (props) => {
                 </div>
                 <div className="tableOverlay">
                 <h5 className="online">Online Now: {props.online}</h5>
+                <BsArrowRightShort className="arrowTiny" size={20}/>
+                <h5 className="statsLink"><a href="/stats">Click Here To See Stats</a></h5>
                     <TableRows 
                     listener={props.listener}
                     fruits={props.fruits}

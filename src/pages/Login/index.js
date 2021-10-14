@@ -24,9 +24,9 @@ export default function Login() {
        });
        toast.success("Successfully logged in!");
        history.push('/');
-       } catch (error) {
-           if (error.response.data.message)
-           toast.error(error.response.data.message);
+       } catch (error) { 
+           if (error.response?.data?.message)
+           toast.error(error.response?.data?.message);
            else
            toast.error(error.message);
        }
