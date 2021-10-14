@@ -50,4 +50,44 @@
     position: absolute;
     top: 25px;
     right: 45px;
+    max-height: 30px;
+}
+
+#logDiv {
+    margin-right: auto;
+    z-index: 9999999;
+    user-select: all;
+    position: absolute;
+    left: 22vw;
+    top: 0.5rem;
+    font-size: 12px;
+    color: var(--primary-green);
+    background-color: var(--secondary-brown);
+    width: 15rem;
+    height: 10vh;
+    max-height: 200px;
+    overflow-y: scroll;
+    pointer-events: all;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) var(--tertiary-green);
+}
+
+#logDiv::-webkit-scrollbar {
+    width: 16px;
+}
+
+#logDiv::-webkit-scrollbar-track {
+    background: var(--tertiary-green);
+}
+
+#logDiv::-webkit-scrollbar-thumb {
+    background-color: #8f54a0;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+#logDiv ul{
+    text-align: left;
+    height: 20px;
+    margin-left: -2rem;
 }

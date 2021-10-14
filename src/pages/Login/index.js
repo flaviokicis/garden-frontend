@@ -7,9 +7,17 @@ import './styles.css';
 
 export default function Login() {
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
        event.preventDefault();
        const getData = async () => {
+        try {
+        const data = await client.get('/auth/checkSession');
+            if (data.status === 200) {
+                return history.push('/');
+            }
+        } catch (error) {
+            //Continue to login
+        }
        try {
        await client.post('/auth/login', {
            nickname: event.target.nickname.value
@@ -17,6 +25,9 @@ export default function Login() {
        toast.success("Successfully logged in!");
        history.push('/');
        } catch (error) {
+           if (error.response.data.message)
+           toast.error(error.response.data.message);
+           else
            toast.error(error.message);
        }
        }

@@ -12,7 +12,11 @@ function App() {
     <Router history={history}>
       <Routes/>
       <GlobalStyle/>
-      <ToastContainer autoClose={3000} position="top-right"/>
+      <ToastContainer autoClose={3000} 
+      position="top-right" 
+      hideProgressBar={false}
+      pauseOnFocusLoss={false}
+      />
     </Router>
     </>
   );

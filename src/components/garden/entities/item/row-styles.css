@@ -5,4 +5,5 @@
     padding: 1rem;
     width: 6rem;
     border: 2px solid var(--primary-green);
+    flex-shrink: 1;
 }

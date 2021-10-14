@@ -1,6 +1,6 @@
 
 
-export default function getButtons(itemState, order) {
+export default function getButtons(itemState, order, id) {
     let type = itemState.type.toUpperCase();
     if (type === "FRUIT") {
         if (order === "PRIMARY") {
@@ -31,6 +31,22 @@ export default function getButtons(itemState, order) {
             }
         } else {
             return {name: 'FEED', clickable: (itemState.ableToFeed)};
+        }
+    } else if (type === "DECORATION") {
+        if (order === "PRIMARY") {
+            if (itemState.userSatId === "NONE") {
+                if (itemState.ableToClean) {
+                    return {name: "SIT  DOWN", clickable: false};
+                }
+                return {name: "SIT  DOWN", clickable: true};
+            }
+            else if (itemState.userSatId === id) {
+                return {name: "STAND UP", clickable: true};
+            } else {
+                return {name: "SIT  DOWN", clickable: true, mock: true};
+            }
+        } else {
+            return {name: 'CLEAN', clickable: itemState.ableToClean}
         }
     }
 

@@ -2,13 +2,16 @@ import React from 'react';
 import CommonItem from './common-item';
 import './row-styles.css';
 
-const CommonRow = ({listener, items}) => {
+const CommonRow = ({listener, items, id}) => {
 
     return (
         <>
         {
            items.map((item) => (
-            <CommonItem key={"key-" + item.entityId} itemState={item} listener={listener} />
+            <CommonItem key={"key-" + item.entityId} 
+            itemState={item} 
+            listener={listener}
+            userId={id} />
            ))
         }
         </>

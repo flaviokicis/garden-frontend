@@ -4,7 +4,7 @@ import DefaultSpinner from '../../components/modals/spinner/default-spinner.js';
 import client from '../../services/client.js';
 import {toast} from 'material-react-toastify';
 import history from '../../services/history.js';
-
+import { handleDeletion, handleHandshake, handleUpdate } from './handler-helper.js';
 
 export default function Garden() {
 
@@ -16,12 +16,11 @@ export default function Garden() {
     const [flowers, setFlowers] = useState([]);
     const [decorations, setDecorations] = useState([]);
     const [players, setPlayers] = useState(0);
-    const [sat, setSat] = useState(false);
+    const [log, setLog] = useState([]);
 
     useEffect(() => {
         const loadEventSource = async () => {
         if (!loaded) {
-        
         // Check if user is logged in
         try {
         const data = await client.get('/auth/checkSession', {});
@@ -40,13 +39,28 @@ export default function Garden() {
         const receivedData = JSON.parse(event.data);
         switch (receivedData.eventType) {
           case "handshake":
-            handleHandshake(receivedData.data);
+            handleHandshake(receivedData.data,
+              setFruits,
+              setFlowers,
+              setAnimals,
+              setDecorations,
+              setPlayers);
             break;
           case "update":
-            handleUpdate(receivedData.data);
+            handleUpdate(receivedData.data, 
+              setFruits, 
+              setFlowers, 
+              setDecorations, 
+              setAnimals, 
+              setPlayers,
+              setLog);
             break;
           case "delete":
-            console.log("UPDATE >>>>>> " + receivedData.data);
+            handleDeletion(receivedData.data, 
+              setFruits, 
+              setFlowers, 
+              setDecorations, 
+              setAnimals);
             break;
           default:
             break;
@@ -61,32 +75,28 @@ export default function Garden() {
     // Receives data from components
     const parentListener = async function(data) {
       try {
-        await client.post('/update', data);
+        const response = await client.post('/update', data);
+        if (response.status === 200) {
+          toast.success("Done!", {
+            autoClose: 1000,
+            pauseOnFocusLoss: false,
+            hideProgressBar: false
+          });
+        }
       } catch (error) {
+        if (error.response?.data?.message.includes("You not in the garden")
+        || error.response?.data?.message.includes("No such entity with provided ID")) {
+          window.location.reload();
+          toast.info("There was a communication problem. Please, try again.")
+          return;
+        } else if (error.status === 401) {
+          history.push('/login');
+          toast.info("Please, log in.")
+          return;
+        }
         toast.error(error.response?.data?.message);
       }
     };
-
-    const handleUpdate = (updateData) => {
-
-    }    
-    const handleHandshake = (handshakeData) => {
-        if (handshakeData.fruits) {
-          setFruits(handshakeData.fruits);
-        } 
-        if (handshakeData.flowers) {
-          setFlowers(handshakeData.flowers);
-        }
-        if (handshakeData.animals) {
-          setAnimals(handshakeData.animals);
-        } 
-        if (handshakeData.decorations) {
-          setDecorations(handshakeData.decorations);
-        }
-        if (handshakeData.playersOnline) {
-          setPlayers(handshakeData.playersOnline);
-        }
-    }
 
     return (
         <>
@@ -98,6 +108,8 @@ export default function Garden() {
             animals={animals}
             decorations={decorations}
             online={players}
+            id={id}
+            log={log}
             />
             {<DefaultSpinner hasLoaded={loaded}/>
             }

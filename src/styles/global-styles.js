@@ -28,10 +28,14 @@ export default createGlobalStyle`
         margin-top: 10px;
     }
 
+    .Toastify__toast-container {
+        max-height: 30px;
+    }
+
     html, body { 
         height: 100%;
         margin: 0;
-        overflow: hidden;
+        overflow-y: hidden;
     }
 
     a {

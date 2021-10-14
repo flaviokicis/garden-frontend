@@ -15,7 +15,8 @@ const Sidebar = (props) => {
                 (<></>))
                 }
             </div>
-            <div className="sbDiv"/>
+            <div className="sbDiv">
+            </div>
             </div>
         </>
     );

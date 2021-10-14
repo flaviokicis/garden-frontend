@@ -22,7 +22,7 @@ const CommonItem = (props) => {
 
     return (
         <>
-         <IconWrapper sendFunction={sendClick}
+         <IconWrapper sendFunction={sendClick} id={props.userId}
          itemState={props.itemState}/>
         </>
     );

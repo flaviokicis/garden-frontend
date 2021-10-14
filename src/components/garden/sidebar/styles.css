@@ -22,6 +22,7 @@
     font-size: 18px;
     animation: leaves 8s ease-in-out infinite alternate;
     animation-delay: 10s;
+    max-width: 10vw;
 }
 
 @keyframes leaves {
@@ -39,12 +40,3 @@
     }
 }
 
-.sbDiv {
-    min-width: 2px;
-    max-width: 5px;
-    width: 5px;
-    background-color: var(--tertiary-green);
-    min-height: 100vw;
-    height: 100%;
-    box-shadow: 8px 4px 18px 11px rgba(9, 9, 9, 0.20);
-}

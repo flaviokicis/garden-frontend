@@ -15,6 +15,15 @@ const GardenContainer = (props) => {
                         </div>
                     </div>
                 </div>
+                <div id="logDiv">
+                <ul>
+                    {
+                        props.log.map((log) => {
+                            return (<ul>{log}</ul>)
+                        })
+                    }
+                </ul>
+                </div>
                 <div className="tableOverlay">
                 <h5 className="online">Online Now: {props.online}</h5>
                     <TableRows 
@@ -23,6 +32,7 @@ const GardenContainer = (props) => {
                     flowers={props.flowers}
                     animals={props.animals}
                     decorations={props.decorations}
+                    id={props.id}
                     />
                 </div>
             </div>

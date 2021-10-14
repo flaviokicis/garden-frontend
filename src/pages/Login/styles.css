@@ -23,6 +23,7 @@
 
 .inputWrapper input {
     margin-top: 6rem;
+    text-align: center;
 }
 
 .inputWrapper button {
@@ -33,4 +34,10 @@
     margin-top: 4px;
     border-radius: 8px;
     margin-bottom: 5rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.inputWrapper button:hover {
+    background: #c4f76a;
+    transform: scale(1.08);
 }
